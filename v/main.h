@@ -4,8 +4,8 @@
 typedef int32_t (*callback)(int32_t);
 callback cb;
 
-int32_t register_callback(callback callback) {
-    cb = callback;
+int32_t register_callback(callback _cb) {
+    cb = _cb;
     return 0;
 }
 

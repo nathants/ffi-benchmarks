@@ -1,5 +1,6 @@
 package main
 
+// #cgo CFLAGS: -Wall -O3
 // #include "main.h"
 import "C"
 
@@ -9,14 +10,16 @@ import (
 )
 
 //export callback
-func callback(x int) {
-	_ = x + 1
+func callback(x C.int) C.int {
+	return x + 1
 }
 
 func main() {
 	start := time.Now()
+	res := 0
 	for i := 0; i < 10_000_000; i++ {
-		C.trigger_callback(1)
+		res += int(C.trigger_callback(1))
 	}
 	fmt.Println(time.Since(start).Seconds())
+	fmt.Println(res)
 }

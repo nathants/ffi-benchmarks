@@ -4,7 +4,7 @@ from cffi import FFI
 ffibuilder = FFI()
 
 ffibuilder.cdef(r"""
-extern "Python" void _py_callback(const int x);
+extern "Python" int _py_callback(const int x);
 static int trigger_callback(const int x);
 """)
 
@@ -13,11 +13,10 @@ ffibuilder.set_source(
     "_exp",
     r"""
 
-static void _py_callback(const int x);
+static int _py_callback(const int x);
 
 static int trigger_callback(const int x) {
-    _py_callback(x);
-    return 0;
+    return _py_callback(x);
 }
 
     """,
@@ -29,9 +28,11 @@ from _exp import ffi, lib
 
 @ffi.def_extern()
 def _py_callback(x):
-    _ = x + 1
+    return x + 1
 
 start = time.monotonic()
+res = 0
 for _ in range(10_000_000):
-    lib.trigger_callback(1)
+    res += lib.trigger_callback(1)
 print(round(time.monotonic() - start, 3))
+print(res)
