@@ -1,38 +1,26 @@
 #!/bin/bash
 set -eou pipefail
 
+indent() {
+    sed -r 's/([0-9])/ \1/'
+}
 
 (
     echo
     echo c
     cd c
     rm -f ./main
-    gcc -O3 -o main main.c
+    gcc -flto -O3 -o main main.c
     ./main
-)
+) | indent
 
 (
     echo
-    echo cpython
-    cd pypy
-    python main.py 2>/dev/null
-)
-
-(
-    echo
-    echo pypy
-    cd pypy
-    pypy main.py 2>/dev/null
-)
-
-(
-    echo
-    echo go
-    cd go
-    rm -f ./main
-    go build &>/dev/null
+    echo v
+    cd v
+    v -prod main.v
     ./main
-)
+) | indent
 
 (
     echo
@@ -41,12 +29,27 @@ set -eou pipefail
     rm -f ./target/release/main
     cargo build --release &>/dev/null
     ./target/release/main
-)
+) | indent
 
 (
     echo
-    echo v
-    cd v
-    v -prod main.v
+    echo pypy
+    cd pypy
+    pypy main.py 2>/dev/null
+) | indent
+
+(
+    echo
+    echo go
+    cd go
+    rm -f ./main
+    go build &>/dev/null
     ./main
-)
+) | indent
+
+(
+    echo
+    echo cpython
+    cd pypy
+    python main.py 2>/dev/null
+) | indent

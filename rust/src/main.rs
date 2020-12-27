@@ -19,6 +19,6 @@ fn main() {
     let dur = std::time::Instant::now()
         .duration_since(start)
         .as_secs_f64();
-    println!("{}", dur);
+    println!("{:.4}", dur);
     println!("{}", res)
 }

@@ -20,6 +20,6 @@ func main() {
 	for i := 0; i < 10_000_000; i++ {
 		res += int(C.trigger_callback(1))
 	}
-	fmt.Println(time.Since(start).Seconds())
+	fmt.Printf("%.3f\n", time.Since(start).Seconds())
 	fmt.Println(res)
 }
