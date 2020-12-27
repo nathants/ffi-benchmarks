@@ -18,8 +18,18 @@ indent() {
     echo
     echo v
     cd v
+    rm -f ./main
     v -prod main.v
     ./main
+) | indent
+
+(
+    echo
+    echo zig
+    cd zig
+    rm -f ./zig-cache/bin/zig
+    zig build -Drelease-safe
+    ./zig-cache/bin/zig
 ) | indent
 
 (

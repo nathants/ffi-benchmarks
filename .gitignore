@@ -3,3 +3,4 @@ _*
 main
 *.out
 *.ghv
+zig-cache

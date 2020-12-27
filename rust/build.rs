@@ -2,7 +2,7 @@ extern crate cc;
 
 fn main() {
     cc::Build::new()
-        .flag("-O3")
+        .opt_level(3)
         .file("src/c/main.c")
-        .compile("libexp.a");
+        .compile("main.a");
 }
