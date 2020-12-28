@@ -10,5 +10,5 @@ int32_t register_callback(callback _cb) {
 }
 
 int32_t trigger_callback(const int32_t x) {
-    return cb(x);
+    return cb((x+1)%64);
 }

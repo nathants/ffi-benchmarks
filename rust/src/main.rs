@@ -4,7 +4,7 @@ extern "C" {
 }
 
 extern "C" fn callback(a: i32) -> i32 {
-    return a + 1;
+    return (a + 1) % 64;
 }
 
 fn main() {
@@ -12,13 +12,13 @@ fn main() {
     let mut res = 0;
     unsafe {
         register_callback(callback);
-        for _ in 0..10_000_000 {
-            res += trigger_callback(1);
+        for _ in 0..100_000_005 {
+            res = trigger_callback(res);
         }
     }
     let dur = std::time::Instant::now()
         .duration_since(start)
         .as_secs_f64();
-    println!("{:.4}", dur);
+    println!("{:.3}", dur);
     println!("{}", res)
 }

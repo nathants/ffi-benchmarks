@@ -9,5 +9,5 @@ int32_t register_callback(callback callback) {
 }
 
 int32_t trigger_callback(int32_t x) {
-    return cb(x);
+    return cb((x + 1) % 64);
 }

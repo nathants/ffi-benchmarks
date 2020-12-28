@@ -7,7 +7,7 @@ indent() {
 
 (
     echo
-    echo c
+    echo gcc
     cd c
     rm -f ./main
     gcc -flto -O3 -o main main.c
@@ -16,10 +16,10 @@ indent() {
 
 (
     echo
-    echo v
-    cd v
+    echo clang
+    cd c
     rm -f ./main
-    v -prod main.v
+    gcc -flto -O3 -o main main.c
     ./main
 ) | indent
 
@@ -30,6 +30,15 @@ indent() {
     rm -f ./zig-cache/bin/zig
     zig build -Drelease-safe
     ./zig-cache/bin/zig
+) | indent
+
+(
+    echo
+    echo v
+    cd v
+    rm -f ./main
+    v -prod main.v
+    ./main
 ) | indent
 
 (

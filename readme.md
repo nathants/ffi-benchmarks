@@ -1,36 +1,40 @@
 # ffi hello worlds and benchmarks
 
-kick the tires on the api and performance of ffi in c, v, zig, rust, pypy, go, and cpython.
+kick the tires on the api and performance of ffi in gcc, clang, zig, v, rust, pypy, go, and cpython.
 
 ```bash
 >> bash run.sh
 
-c
- 0.000000069
- 20000000
+gcc
+ 0.284
+ 10
 
-v
- 0.000023
- 20000000
+clang
+ 0.288
+ 10
 
 zig
- 0.012
- 20000000
+ 0.254
+ 10
+
+v
+ 0.312
+ 10
 
 rust
- 0.0168
- 20000000
+ 0.316
+ 10
 
 pypy
- 0.67
- 20000000
+ 7.299
+ 10
 
 go
- 1.484
- 20000000
+ 14.950
+ 10
 
 cpython
- 2.889
- 20000000
+ 29.255
+ 10
 
 ```

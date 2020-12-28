@@ -16,7 +16,7 @@ ffibuilder.set_source(
 static int _py_callback(const int x);
 
 static int trigger_callback(const int x) {
-    return _py_callback(x);
+    return _py_callback((x+1)%64);
 }
 
     """,
@@ -28,11 +28,11 @@ from _exp import ffi, lib
 
 @ffi.def_extern()
 def _py_callback(x):
-    return x + 1
+    return (x + 1) % 64
 
 start = time.monotonic()
 res = 0
-for _ in range(10_000_000):
-    res += lib.trigger_callback(1)
+for _ in range(100_000_005):
+    res = lib.trigger_callback(res)
 print(round(time.monotonic() - start, 3))
 print(res)
